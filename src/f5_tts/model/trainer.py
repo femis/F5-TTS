@@ -206,7 +206,7 @@ class Trainer:
                 latest_checkpoint = next(f for f in all_checkpoints if f.startswith("pretrained_"))
 
         # checkpoint = torch.load(f"{self.checkpoint_path}/{latest_checkpoint}", map_location=self.accelerator.device)  # rather use accelerator.load_state ಥ_ಥ
-        checkpoint = torch.load(f"{self.checkpoint_path}/{latest_checkpoint}", weights_only=True, map_location="cpu")
+        checkpoint = torch.load(f"{self.checkpoint_path}/{latest_checkpoint}", weights_only=False, map_location="cpu")
 
         # patch for backward compatibility, 305e3ea
         for key in ["ema_model.mel_spec.mel_stft.mel_scale.fb", "ema_model.mel_spec.mel_stft.spectrogram.window"]:

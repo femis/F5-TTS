@@ -381,7 +381,7 @@ def run_sim(args):
     device = f"cuda:{rank}"
 
     model = ECAPA_TDNN_SMALL(feat_dim=1024, feat_type="wavlm_large", config_path=None)
-    state_dict = torch.load(ckpt_dir, weights_only=True, map_location=lambda storage, loc: storage)
+    state_dict = torch.load(ckpt_dir, weights_only=False, map_location=lambda storage, loc: storage)
     model.load_state_dict(state_dict["model"], strict=False)
 
     use_gpu = True if torch.cuda.is_available() else False

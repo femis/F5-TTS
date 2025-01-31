@@ -990,7 +990,7 @@ def calculate_train(
 
 def extract_and_save_ema_model(checkpoint_path: str, new_checkpoint_path: str, safetensors: bool) -> str:
     try:
-        checkpoint = torch.load(checkpoint_path, weights_only=True)
+        checkpoint = torch.load(checkpoint_path, weights_only=False)
         print("Original Checkpoint Keys:", checkpoint.keys())
 
         ema_model_state_dict = checkpoint.get("ema_model_state_dict", None)
@@ -1021,7 +1021,7 @@ def expand_model_embeddings(ckpt_path, new_ckpt_path, num_new_tokens=42):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-    ckpt = torch.load(ckpt_path, map_location="cpu")
+    ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
 
     ema_sd = ckpt.get("ema_model_state_dict", {})
     embed_key_ema = "ema_model.transformer.text_embed.text_embed.weight"

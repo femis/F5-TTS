@@ -39,6 +39,7 @@ dependencies = [
     "transformers_stream_generator",
     "vocos",
     "wandb",
+    "flask",
     "x_transformers>=1.31.14",
 ]
 

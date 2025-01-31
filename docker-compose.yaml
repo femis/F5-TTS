@@ -1,0 +1,14 @@
+services:
+  f5_tts:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: f5_tts
+    ports:
+      - "6020:6020"
+      - "6021:6021"
+    deploy:
+      resources:
+        limits:
+          cpus: '16'
+    restart: unless-stopped

@@ -110,7 +110,7 @@ def load_vocoder(vocoder_name="vocos", is_local=False, local_path="", device=dev
             config_path = hf_hub_download(repo_id=repo_id, cache_dir=hf_cache_dir, filename="config.yaml")
             model_path = hf_hub_download(repo_id=repo_id, cache_dir=hf_cache_dir, filename="pytorch_model.bin")
         vocoder = Vocos.from_hparams(config_path)
-        state_dict = torch.load(model_path, map_location="cpu", weights_only=True)
+        state_dict = torch.load(model_path, map_location="cpu", weights_only=False)
         from vocos.feature_extractors import EncodecFeatures
 
         if isinstance(vocoder.feature_extractor, EncodecFeatures):
@@ -197,7 +197,7 @@ def load_checkpoint(model, ckpt_path, device: str, dtype=None, use_ema=True):
 
         checkpoint = load_file(ckpt_path, device=device)
     else:
-        checkpoint = torch.load(ckpt_path, map_location=device, weights_only=True)
+        checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
 
     if use_ema:
         if ckpt_type == "safetensors":
